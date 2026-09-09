@@ -1,4 +1,3 @@
-def main(num1,num2):
     while True:
         try:
             num1 = int(input("Enter first number: "))
@@ -22,8 +21,3 @@ def main(num1,num2):
         again = input("Do you want to calculate again? (yes/no): ").lower()
         if again == "no" or again == "n":
             break
-def add(a, b):
-    return a + b
-
-if name == "main":
-    main()
