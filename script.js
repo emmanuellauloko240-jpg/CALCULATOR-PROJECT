@@ -26,14 +26,9 @@ function calculate() {
         case "/":
             if (second === 0) {
                 display.value = "Cannot divide by zero";
-                
             } else {
                 display.value = first / second;
             }
-            break;
-
-        case "%":
-            display.value = first % second;
             break;
 
         case "^":
@@ -123,7 +118,7 @@ for (let button of buttons) {
 
         let value = event.target.value;
 
-        if (["+", "-", "*", "/", "^","%"].includes(value)) {
+        if (["+", "-", "*", "/", "^"].includes(value)) {
             handleOperator(value);
 
         } else if (!isNaN(value) || value === ".") {
