@@ -32,7 +32,7 @@ function calculate() {
             break;
 
         case "%":
-            display.value = first % second
+            display.value = first % second;
             break;
 
         case "^":
