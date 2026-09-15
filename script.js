@@ -31,6 +31,10 @@ function calculate() {
             }
             break;
 
+        case "%":
+            display.value = first % second
+            break;
+
         case "^":
             display.value = first ** second;
             break;
@@ -118,7 +122,7 @@ for (let button of buttons) {
 
         let value = event.target.value;
 
-        if (["+", "-", "*", "/", "^"].includes(value)) {
+        if (["+", "-", "*", "/", "^","%"].includes(value)) {
             handleOperator(value);
 
         } else if (!isNaN(value) || value === ".") {
