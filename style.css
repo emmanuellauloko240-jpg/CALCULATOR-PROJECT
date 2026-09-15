@@ -46,6 +46,10 @@ h1 {
 
     font-size: 36px;
     text-align: right;
+
+    pointer-events: none;
+    user-select: none;
+    caret-color: transparent;
 }
 
 button {
