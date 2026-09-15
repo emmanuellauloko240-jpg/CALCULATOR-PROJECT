@@ -26,7 +26,7 @@ function calculate() {
         case "/":
             if (second === 0) {
                 display.value = "Cannot divide by zero";
-                justCalculated = true;
+                
             } else {
                 display.value = first / second;
             }
