@@ -7,25 +7,32 @@ let secondNumber;
 let justCalculated = false;
 
 function calculate() {
+    let first = Number(firstNumber);
+    let second = Number(secondNumber);
+
     switch (operation) {
         case "+":
-            display.value = firstNumber + secondNumber;
+            display.value = first + second;
             break;
 
         case "-":
-            display.value = firstNumber - secondNumber;
+            display.value = first - second;
             break;
 
         case "*":
-            display.value = firstNumber * secondNumber;
+            display.value = first * second;
             break;
 
         case "/":
-            if (secondNumber === 0) {
+            if (second === 0) {
                 display.value = "Cannot divide by zero";
             } else {
-                display.value = firstNumber / secondNumber;
+                display.value = first / second;
             }
+            break;
+
+        case "^":
+            display.value = first ** second;
             break;
     }
 }
@@ -41,49 +48,80 @@ function clearCalculator() {
 function handleNumber(value) {
     if (justCalculated) {
         display.value = value;
-        firstNumber = Number(value);
+        firstNumber = value;
         operation = undefined;
         secondNumber = undefined;
         justCalculated = false;
         return;
     }
 
-    display.value = display.value + value;
-
     if (operation === undefined) {
+
         if (firstNumber === undefined) {
-            firstNumber = Number(value);
+
+            if (value === ".") {
+                firstNumber = "0.";
+                display.value = "0.";
+            } else {
+                firstNumber = value;
+                display.value = value;
+            }
+
         } else {
-            firstNumber = Number(String(firstNumber) + value);
+
+            if (value === "." && String(firstNumber).includes(".")) {
+                return;
+            }
+
+            firstNumber = String(firstNumber) + value;
+            display.value = String(display.value) + value;
         }
+
     } else {
+
         if (secondNumber === undefined) {
-            secondNumber = Number(value);
+
+            if (value === ".") {
+                secondNumber = "0.";
+                display.value = String(display.value) + "0.";
+            } else {
+                secondNumber = value;
+                display.value = String(display.value) + value;
+            }
+
         } else {
-            secondNumber = Number(String(secondNumber) + value);
+
+            if (value === "." && String(secondNumber).includes(".")) {
+                return;
+            }
+
+            secondNumber = String(secondNumber) + value;
+            display.value = String(display.value) + value;
         }
     }
 }
 
 function handleOperator(value) {
     if (justCalculated) {
-        firstNumber = Number(display.value);
+        firstNumber = display.value;
         secondNumber = undefined;
         justCalculated = false;
     }
 
     operation = value;
-    display.value = display.value + value;
+    display.value = String(display.value) + value;
 }
 
 for (let button of buttons) {
+
     button.addEventListener("click", function(event) {
+
         let value = event.target.value;
 
-        if (["+", "-", "*", "/"].includes(value)) {
+        if (["+", "-", "*", "/", "^"].includes(value)) {
             handleOperator(value);
 
-        } else if (!isNaN(value)) {
+        } else if (!isNaN(value) || value === ".") {
             handleNumber(value);
 
         } else if (value === "=") {
